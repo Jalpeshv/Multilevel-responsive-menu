@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Mobile-friendly Hamburger Navigation With Submenus Example</title>
+		<meta charset="UTF-8" />
+		<link href="https://www.cssscript.com/demo/sticky.css" rel="stylesheet" type="text/css">
+		
+		<meta name="format-detection" content="telephone-no" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+		/>
+        <style>
+            /*null style*/
+* {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+*,
+*:before,
+*:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+:focus,
+:active {
+	outline: none;
+}
+a:focus,
+a:active {
+	outline: none;
+}
+nav,
+footer,
+header,
+aside {
+	display: block;
+}
+html,
+body {
+	height: 100%;
+	width: 100%;
+	font-size: 100%;
+	line-height: 1;
+	font-size: 14px;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+input,
+button,
+textarea {
+	font-family: inherit;
+}
+input::-ms-clear {
+	display: none;
+}
+button {
+	cursor: pointer;
+}
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+a,
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+ul li {
+	list-style: none;
+}
+img {
+	vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+/*-----------------------------------------------*/
+html,
+body {
+	height: 100%;
+	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+	color: #fff;
+	font-size: 14px;
+	background-color: #333;
+}
+body._lock {
+	overflow: hidden;
+}
+.wrapper {
+	min-height: 100%;
+}
+.page {
+	padding: 90px 0 30px 0;
+}
+.page__section {
+	padding: 30px;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+.page__section_1 {
+	background-color: #794f45;
+}
+.page__section_2 {
+	background-color: #77608d;
+}
+.page__section_3 {
+	background-color: #7a956b;
+}
+.page__title {
+	font-size: 40px;
+	margin-bottom: 20px;
+}
+.page__text {
+	font-size: 16px;
+	line-height: 150%;
+}
+.page__text p {
+	margin-bottom: 20px;
+}
+.page__sub-title {
+	font-size: 30px;
+	margin-bottom: 20px;
+}
+
+/*-------------------------*/
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 10;
+	background-color: #912105;
+}
+.header__container {
+	padding: 0 30px;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 70px;
+}
+.header__logo {
+	border-radius: 50%;
+	background-color: #fff;
+	position: relative;
+	z-index: 5;
+	width: 40px;
+	height: 40px;
+}
+.header__menu {
+}
+.menu {
+}
+.menu__icon {
+	display: none;
+}
+.menu__body {
+}
+.menu__list {
+}
+.menu__list > li {
+	position: relative;
+	margin-left: 20px;
+}
+.menu__link {
+	color: #fff;
+	font-size: 18px;
+}
+.menu__sub-list {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	background-color: #000;
+	padding: 15px;
+	min-width: 200px;
+}
+.menu__sub-list li {
+	margin-bottom: 10px;
+}
+.menu__sub-list li:last-child {
+	margin-bottom: 0px;
+}
+.menu__sub-link {
+	color: #fff;
+}
+.menu__sub-link:hover {
+	text-decoration: underline;
+}
+.menu__arrow {
+	display: none;
+}
+/*-------------------------*/
+body._pc .menu__list > li:hover .menu__sub-list {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(0, 0);
+	pointer-events: all;
+}
+body._touch .menu__list > li {
+	display: flex;
+	align-items: center;
+}
+body._touch .menu__link {
+	flex: 1 1 auto;
+}
+body._touch .menu__arrow {
+	display: block;
+	width: 0;
+	height: 0;
+	margin-left: 5px;
+	transition: transform 0.3s ease 0s;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 10px solid #fff;
+}
+
+body._touch .menu__list > li._active .menu__sub-list {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(0, 0);
+	pointer-events: all;
+}
+body._touch .menu__list > li._active .menu__arrow {
+	transform: rotate(180deg);
+}
+/*-------------------------*/
+@media (min-width: 767px) {
+	.menu__list {
+		display: flex;
+		align-items: center;
+	}
+	.menu__list > li {
+		/* padding from link to sub links area to avoid breaking hover on mouse move */
+		padding: 10px 0;
+	}
+	.menu__sub-list {
+		transform: translate(0, 10px);
+		opacity: 0;
+		visibility: hidden;
+		/* to avoid mistaken hover */
+		pointer-events: none;
+		transition: all 0.3s ease 0s;
+	}
+}
+
+@media (max-width: 767px) {
+	.menu__icon {
+		z-index: 5;
+		display: block;
+		position: relative;
+		width: 30px;
+		height: 18px;
+		cursor: pointer;
+	}
+	.menu__icon span,
+	.menu__icon::before,
+	.menu__icon::after {
+		left: 0;
+		position: absolute;
+		height: 10%;
+		width: 100%;
+		transition: all 0.3s ease 0s;
+		background-color: #fff;
+	}
+	.menu__icon::before,
+	.menu__icon::after {
+		content: '';
+	}
+	.menu__icon::before {
+		top: 0;
+	}
+	.menu__icon::after {
+		bottom: 0;
+	}
+	.menu__icon span {
+		top: 50%;
+		transform: scale(1) translate(0, -50%);
+	}
+
+	.menu__icon._active span {
+		transform: scale(0) translate(0, -50%);
+	}
+	.menu__icon._active::before {
+		top: 50%;
+		transform: rotate(-45deg) translate(0, -50%);
+	}
+	.menu__icon._active::after {
+		bottom: 50%;
+		transform: rotate(45deg) translate(0, 50%);
+	}
+
+	.menu__body {
+		position: fixed;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.9);
+		padding: 100px 30px 30px 30px;
+		transition: left 0.3s ease 0s;
+		/* for scroll on menu */
+		overflow: auto;
+	}
+	.menu__body._active {
+		/* use left and not transform/translate because it scroll the .menu__body::before when u scroll menu */
+		left: 0;
+	}
+	.menu__body::before {
+		content: '';
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
+		height: 70px;
+		background-color: #912105;
+		z-index: 2;
+	}
+	.menu__list > li {
+		flex-wrap: wrap;
+		margin-bottom: 30px;
+	}
+	.menu__list > li:last-child {
+		margin-bottom: 0;
+	}
+	.menu__list > li._active .menu__sub-list {
+		display: block;
+	}
+	.menu__link {
+		font-size: 24px;
+	}
+	.menu__sub-list {
+		position: relative;
+		background-color: #fff;
+		flex: 1 1 100%;
+		margin-top: 20px;
+		display: none;
+	}
+	.menu__sub-link {
+		font-size: 20px;
+		color: #000;
+	}
+	
+}
+
+        </style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<header class="header">
+				<div class="header__container">
+					<!-- Logo -->
+					<a href="" class="header__logo"></a>
+					<!-- Hamburger Toggle Button -->
+					<div class="header__menu menu">
+						<div class="menu__icon">
+							<span></span>
+						</div>
+						<!-- Replace Your Site Links -->
+						<nav data-sub_menu_auto_close="true" class="menu__body">
+							<ul class="menu__list">
+								<li>
+									<a data-goto=".page__section_1" href="" class="menu__link"
+										>Section 1</a
+									>
+								</li>
+								<li>
+									<a data-goto=".page__section_2" href="" class="menu__link"
+										>Section 2</a
+									>
+								</li>
+								<li>
+									<a data-goto=".page__section_3" href="" class="menu__link"
+										>Section 3</a
+									>
+								</li>
+								<li>
+									<a href="" class="menu__link">Page 1</a>
+									<span class="menu__arrow"></span>
+									<ul class="menu__sub-list">
+										<li>
+											<a href="" class="menu__sub-link">Section page 1</a>
+										</li>
+										<li>
+											<a href="" class="menu__sub-link">Section page 2</a>
+										</li>
+										<li>
+											<a href="" class="menu__sub-link">Section page 3</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="" class="menu__link">Page 2</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</header>
+
+			<main class="page">
+				<section class="page__section page__section_1">
+					<h1 class="page__title">
+						Mobile-friendly Hamburger Navigation With Submenus Example
+					</h1>
+					<div><div id="carbon-block"></div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- CSSScript Demo Page -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-2783044520727903"
+     data-ad-slot="3025259193"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+					<div class="page__text">
+						<p>
+							A responsive, mobile-friendly, cross-device, multi-level hamburger navigation written in JavaScript and CSS/CSS3.
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+					</div>
+				</section>
+
+				<section class="page__section page__section_2">
+					<h2 class="page__sub-title">
+						Sec 2 - Submenu opens on hover(not mobile), on mobile there is
+						button to open dropdown menu.
+					</h2>
+					<div class="page__text">
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+					</div>
+				</section>
+
+				<section class="page__section page__section_3">
+					<h2 class="page__sub-title">Sec 3 Lorem ipsum dolor sit amet.</h2>
+					<div class="page__text">
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+							accusamus vitae nihil beatae dolorem corrupti, officiis unde
+							blanditiis quas! Numquam, illo iusto. Quasi, nihil. Soluta
+							laudantium at consectetur sapiente accusamus!
+						</p>
+					</div>
+				</section>
+			</main>
+		</div>
+
+		<script type="text/javascript">
+'use strict';
+
+const isMobile = {
+	Android: function () {
+		return navigator.userAgent.match(/Android/i);
+	},
+	BlackBerry: function () {
+		return navigator.userAgent.match(/BlackBerry/i);
+	},
+	iOS: function () {
+		return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+	},
+	Opera: function () {
+		return navigator.userAgent.match(/Opera Mini/i);
+	},
+	Windows: function () {
+		return navigator.userAgent.match(/IEMobile/i);
+	},
+	any: function () {
+		return (
+			isMobile.Android() ||
+			isMobile.BlackBerry() ||
+			isMobile.iOS() ||
+			isMobile.Opera() ||
+			isMobile.Windows()
+		);
+	},
+};
+
+if (isMobile.any()) {
+	document.body.classList.add('_touch');
+
+	let menuArrows = document.querySelectorAll('.menu__arrow');
+	if (menuArrows.length > 0) {
+		for (let index = 0; index < menuArrows.length; index++) {
+			const menuArrow = menuArrows[index];
+			menuArrow.addEventListener('click', function (e) {
+				menuArrow.parentElement.classList.toggle('_active');
+			});
+		}
+	}
+} else {
+	document.body.classList.add('_pc');
+}
+
+// burger menu
+const iconMenu = document.querySelector('.menu__icon');
+const menuBody = document.querySelector('.menu__body');
+if (iconMenu) {
+	iconMenu.addEventListener('click', function (e) {
+		document.body.classList.toggle('_lock');
+		iconMenu.classList.toggle('_active');
+		menuBody.classList.toggle('_active');
+	});
+}
+
+// scroll on click
+const menuLinks = document.querySelectorAll('.menu__link[data-goto]');
+if (menuLinks.length > 0) {
+	menuLinks.forEach((menuLink) => {
+		menuLink.addEventListener('click', onMenuLinkClick);
+	});
+
+	function onMenuLinkClick(e) {
+		const menuLink = e.target;
+		if (
+			menuLink.dataset.goto &&
+			document.querySelector(menuLink.dataset.goto)
+		) {
+			const gotoBlock = document.querySelector(menuLink.dataset.goto);
+			const gotoBlockValue =
+				gotoBlock.getBoundingClientRect().top +
+				pageYOffset -
+				document.querySelector('.header').offsetHeight;
+
+			if (iconMenu.classList.contains('_active')) {
+				document.body.classList.remove('_lock');
+				iconMenu.classList.remove('_active');
+				menuBody.classList.remove('_active');
+
+				// auto close sub-menu
+				if (
+					menuBody.dataset.sub_menu_auto_close &&
+					document.body.classList.contains('_touch')
+				) {
+					let menuArrows = document.querySelectorAll('.menu__arrow');
+					for (let index = 0; index < menuArrows.length; index++) {
+						menuArrows[index].parentElement.classList.remove('_active');
+					}
+				}
+			}
+
+			window.scrollTo({
+				top: gotoBlockValue,
+				behavior: 'smooth',
+			});
+			e.preventDefault();
+		}
+	}
+}
+
+
+        </script>
+	
+	</body>
+</html>
